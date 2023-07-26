@@ -1,0 +1,2595 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Mybatis-plus实战项目演示+自定义元数据对象处理器+ws, HTML,CSS,JavaScript,JQuery,java,linux等">
+    <meta name="description" content="本网站是个人兴趣爱好，总结分享经验，记录生活点滴的平台，希望在以后的学习旅途中，走出自己的风景。">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Mybatis-plus实战项目演示+自定义元数据对象处理器+ws | 安稳 | 个人博客</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+
+   <style>
+    body{
+       background-image: url(https://cdn.jsdelivr.net/gh/hitushen/blog_imges/imges/83968b7d177c636fbd78242efe45f275.png);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">安稳 | 个人博客</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友链</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">安稳 | 个人博客</div>
+        <div class="logo-desc">
+            
+            本网站是个人兴趣爱好，总结分享经验，记录生活点滴的平台，希望在以后的学习旅途中，走出自己的风景。
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Mybatis-plus实战项目演示+自定义元数据对象处理器+ws</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/mybatis-java-%E6%95%B0%E6%8D%AE%E5%BA%93-WebSocket-%E5%85%83%E6%95%B0%E6%8D%AE/">
+                                <span class="chip bg-color">mybatis java 数据库 WebSocket 元数据</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/java%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" class="post-category">
+                                java开发框架
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-12-09
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-04-10
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.7k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    20 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <span id="more"></span>
+
+<p><strong>目录</strong></p>
+<p><a href="#%E4%B8%80%EF%BC%8Cmybatis-plus%E5%AE%9E%E6%88%98%E4%B8%80">一，mybatis-plus实战一</a></p>
+<p><a href="#1.%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96">1.导入依赖</a></p>
+<p><a href="#2.application.yml%E9%85%8D%E7%BD%AE">2.application.yml配置</a></p>
+<p><a href="#3.%E5%AE%9E%E4%BD%93%E7%B1%BB">3.实体类</a></p>
+<p><a href="#4.mapper">4.mapper</a></p>
+<p><a href="#5.service%E5%B1%82">5.service层</a></p>
+<p><a href="#6.%E5%90%AF%E5%8A%A8%E7%B1%BB%E4%B8%8A%E9%85%8D%E7%BD%AE">6.启动类上配置</a></p>
+<p><a href="#%E4%BA%8C%EF%BC%8Cmybatis-plus%E5%AE%9E%E6%88%98%E4%BA%8C">二，mybatis-plus实战二</a></p>
+<p><a href="#1.%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96">1.导入依赖</a></p>
+<p><a href="#2.application.yml%E9%85%8D%E7%BD%AE">2.application.yml配置</a></p>
+<p><a href="#3.%E5%AE%9E%E4%BD%93%E7%B1%BB">3.实体类</a></p>
+<p><a href="#2.mapper">2.mapper</a></p>
+<p><a href="#3.service">3.service</a></p>
+<p><a href="#4.%E5%88%86%E9%A1%B5%E9%85%8D%E7%BD%AE">4.分页配置</a></p>
+<p><a href="#5.%E6%94%BE%E4%B8%80%E4%B8%AA%E5%9C%A8controller%E5%B1%82%E5%AE%9E%E7%8E%B0%E7%9A%84mybatis-plus%E7%9A%84%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0">5.放一个在controller层实现的mybatis-plus的具体实现</a></p>
+<p><a href="#6.%E5%90%AF%E5%8A%A8%E7%B1%BB%E4%B8%8A%E5%8A%A0%E4%B8%8A%E6%B3%A8%E8%A7%A3">6.启动类上加上注解</a></p>
+<p><a href="#%E4%B8%89%EF%BC%8C%E6%97%B6%E9%97%B4%E6%9B%B4%E6%96%B0%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%EF%BC%88%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E6%95%B0%E6%8D%AE%E5%AF%B9%E8%B1%A1%E5%A4%84%E7%90%86%E5%99%A8%EF%BC%89">三，时间更新全局配置（自定义元数据对象处理器）</a></p>
+<p><a href="#1.%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%B8%E5%85%B3%E5%AD%97%E6%AE%B5%E9%85%8D%E7%BD%AE">1.数据库相关字段配置</a></p>
+<p><a href="#2.%20%E5%AE%9E%E4%BD%93%E7%B1%BB%E9%85%8D%E7%BD%AE">2. 实体类配置</a></p>
+<p><a href="#%E5%9B%9B.WebSocket%E6%89%93%E9%80%A0%E5%9C%A8%E7%BA%BF%E8%81%8A%E5%A4%A9%E5%AE%A4">四.WebSocket打造在线聊天室</a></p>
+<p><a href="#1.%E5%AF%BC%E5%85%A5%E4%BE%9D%E8%B5%96">1.导入依赖</a></p>
+<p><a href="#2.%E9%85%8D%E7%BD%AE%E7%B1%BB">2.配置类</a></p>
+<p><a href="#%C2%A03.%E5%B7%A5%E5%85%B7%E7%B1%BB">&nbsp;3.工具类</a></p>
+<p><a href="#4.controller">4.controller</a></p>
+<p><a href="#5.index.html">5.index.html</a></p>
+<hr>
+<h1 id="一，mybatis-plus实战一"><a href="#一，mybatis-plus实战一" class="headerlink" title="一，mybatis-plus实战一"></a>一，mybatis-plus实战一</h1><h2 id="1-导入依赖"><a href="#1-导入依赖" class="headerlink" title="1.导入依赖"></a>1.导入依赖</h2><pre><code>        &lt;dependency&gt;
+            &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;3.5.1&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<h2 id="2-application-yml配置"><a href="#2-application-yml配置" class="headerlink" title="2.application.yml配置"></a>2.application.yml配置</h2><pre><code>spring:
+  # 配置数据源信息
+  datasource:
+    # 配置数据源类型
+    type: com.zaxxer.hikari.HikariDataSource
+    # 配置连接数据库的各个信息
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/intrest?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC
+    username: root
+    password: 12345678
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  # 设置MyBatis-Plus的全局配置
+#  global-config:
+#    db-config:
+#      # 设置实体类所对应的表的统一前缀
+#      table-prefix: t_
+#      # 设置统一的主键生成策略
+#      id-type: auto
+#  # 配置类型别名所对应的包
+  type-aliases-package: com.interest.pojo
+#  # 扫描通用枚举的
+ # 包
+#  type-enums-package: com.interest.enums
+
+</code></pre>
+<h2 id="3-实体类"><a href="#3-实体类" class="headerlink" title="3.实体类"></a>3.实体类</h2><pre><code class="java">package com.interest.pojo;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * @author a1002
+ */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("interest")
+public class Interest {
+    @JsonSerialize(using = ToStringSerializer.class)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    private Long id;
+    private String code;
+    private String name;
+    private String sex;
+    private String birthday;
+    private String phone;
+    private String type;
+    private String course;
+    private String registerTime;
+    private String remaining;
+    private String score;
+
+    public Interest(String code, String name, String sex, String birthday, String phone, String type, String course, String registerTime, String remaining, String score) {
+        this.code = code;
+        this.name = name;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.phone = phone;
+        this.type = type;
+        this.course = course;
+        this.registerTime = registerTime;
+        this.remaining = remaining;
+        this.score = score;
+    }
+}
+</code></pre>
+<h2 id="4-mapper"><a href="#4-mapper" class="headerlink" title="4.mapper"></a>4.mapper</h2><pre><code class="java">package com.interest.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.interest.pojo.Interest;
+import org.springframework.stereotype.Repository;
+
+/**
+ * @author a1002
+ */
+@Repository
+public interface InterestMapper extends BaseMapper&lt;Interest&gt; {
+
+}
+</code></pre>
+<h2 id="5-service层"><a href="#5-service层" class="headerlink" title="5.service层"></a>5.service层</h2><pre><code class="java">package com.interest.service;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.interest.config.Response;
+import com.interest.pojo.Interest;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @author a1002
+ */
+public interface InterestService extends IService&lt;Interest&gt; {
+    
+}
+</code></pre>
+<pre><code class="java">package com.interest.service.impl;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.interest.config.Response;
+import com.interest.mapper.InterestMapper;
+import com.interest.pojo.Interest;
+import com.interest.service.InterestService;
+import com.interest.utils.IDutils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @author a1002
+ */
+@Service
+public class InterestServiceImpl extends ServiceImpl&lt;InterestMapper,Interest&gt; implements InterestService {
+
+}
+</code></pre>
+<h2 id="6-启动类上配置"><a href="#6-启动类上配置" class="headerlink" title="6.启动类上配置"></a>6.启动类上配置</h2><pre><code class="java">import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+/**
+ * @author a1002
+ */
+@Slf4j
+@SpringBootApplication
+//@ServletComponentScan
+@EnableTransactionManagement
+@EnableCaching
+@MapperScan("com.blog.mapper")
+public class BlogApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(BlogApplication.class, args);
+        log.info("项目启动成功...");
+    }
+}
+</code></pre>
+<h1 id="二，mybatis-plus实战二"><a href="#二，mybatis-plus实战二" class="headerlink" title="二，mybatis-plus实战二"></a>二，mybatis-plus实战二</h1><h2 id="1-导入依赖-1"><a href="#1-导入依赖-1" class="headerlink" title="1.导入依赖"></a>1.导入依赖</h2><pre><code class="java">        &lt;!--mybaties-plus--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;3.4.2&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<h2 id="2-application-yml配置-1"><a href="#2-application-yml配置-1" class="headerlink" title="2.application.yml配置"></a>2.application.yml配置</h2><pre><code class="java">mybatis-plus:
+  configuration:
+    #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: ASSIGN_ID
+</code></pre>
+<h2 id="3-实体类-1"><a href="#3-实体类-1" class="headerlink" title="3.实体类"></a>3.实体类</h2><pre><code class="java">import lombok.Data;
+
+import java.io.Serializable;
+
+
+@Data
+public class Orders implements Serializable {
+}
+</code></pre>
+<h2 id="2-mapper"><a href="#2-mapper" class="headerlink" title="2.mapper"></a>2.mapper</h2><pre><code class="java">import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.yangeat.entity.AddressBook;
+import org.apache.ibatis.annotations.Mapper;
+
+/**
+ * @author a1002
+ */
+@Mapper
+public interface AddressBookMapper extends BaseMapper&lt;AddressBook&gt; {
+
+}
+</code></pre>
+<h2 id="3-service"><a href="#3-service" class="headerlink" title="3.service"></a>3.service</h2><pre><code class="java">import com.baomidou.mybatisplus.extension.service.IService;
+import com.yangeat.entity.AddressBook;
+
+/**
+ * @author a1002
+ */
+public interface AddressBookService extends IService&lt;AddressBook&gt; {
+
+}
+</code></pre>
+<pre><code class="java">import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yangeat.entity.AddressBook;
+import com.yangeat.mapper.AddressBookMapper;
+import com.yangeat.service.AddressBookService;
+import org.springframework.stereotype.Service;
+
+/**
+ * @author a1002
+ */
+@Service
+public class AddressBookServiceImpl extends ServiceImpl&lt;AddressBookMapper, AddressBook&gt; implements AddressBookService {
+
+}
+</code></pre>
+<h2 id="4-分页配置"><a href="#4-分页配置" class="headerlink" title="4.分页配置"></a>4.分页配置</h2><pre><code class="java">package com.blog.config;
+
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * 配置MP的分页插件
+ *
+ * @author a1002
+ */
+@Configuration
+public class MybatisPlusConfig {
+
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
+        mybatisPlusInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
+        return mybatisPlusInterceptor;
+    }
+}
+</code></pre>
+<p>分页实际应用：</p>
+<pre><code class="java">@Override
+    public R list(int page, int size, String name) {
+        Page&lt;User&gt; pageInfo = new Page&lt;&gt;(page, size);
+        LambdaQueryWrapper&lt;User&gt; queryWrapper = new LambdaQueryWrapper&lt;&gt;();
+        queryWrapper.like(name != null, User::getUsername, name);
+        queryWrapper.orderByDesc(User::getUpdateTime);
+        userService.page(pageInfo, queryWrapper);
+
+        return R.success(pageInfo);
+    }
+</code></pre>
+<h2 id="5-放一个在controller层实现的mybatis-plus的具体实现"><a href="#5-放一个在controller层实现的mybatis-plus的具体实现" class="headerlink" title="5.放一个在controller层实现的mybatis-plus的具体实现"></a>5.放一个在controller层实现的mybatis-plus的具体实现</h2><pre><code class="java">package com.yangeat.controller;
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yangeat.common.R;
+import com.yangeat.dto.SetmealDto;
+import com.yangeat.entity.Category;
+import com.yangeat.entity.Setmeal;
+import com.yangeat.service.CategoryService;
+import com.yangeat.service.SetmealDishService;
+import com.yangeat.service.SetmealService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * 套餐管理
+ */
+
+@RestController
+@RequestMapping("/setmeal")
+@Slf4j
+public class SetmealController {
+
+    @Autowired
+    private SetmealService setmealService;
+
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private SetmealDishService setmealDishService;
+
+    /**
+     * 新增套餐
+     *
+     * @param setmealDto
+     * @return
+     */
+    @PostMapping
+    public R&lt;String&gt; save(@RequestBody SetmealDto setmealDto) {
+        log.info("套餐信息：{}", setmealDto);
+
+        setmealService.saveWithDish(setmealDto);
+
+        return R.success("新增套餐成功");
+    }
+
+    /**
+     * 套餐分页查询
+     *
+     * @param page
+     * @param pageSize
+     * @param name
+     * @return
+     */
+    @GetMapping("/page")
+    public R&lt;Page&gt; page(int page, int pageSize, String name) {
+        //分页构造器对象
+        Page&lt;Setmeal&gt; pageInfo = new Page&lt;&gt;(page, pageSize);
+        Page&lt;SetmealDto&gt; dtoPage = new Page&lt;&gt;();
+
+        LambdaQueryWrapper&lt;Setmeal&gt; queryWrapper = new LambdaQueryWrapper&lt;&gt;();
+        //添加查询条件，根据name进行like模糊查询
+        queryWrapper.like(name != null, Setmeal::getName, name);
+        //添加排序条件，根据更新时间降序排列
+        queryWrapper.orderByDesc(Setmeal::getUpdateTime);
+
+        setmealService.page(pageInfo, queryWrapper);
+
+        //对象拷贝
+        BeanUtils.copyProperties(pageInfo, dtoPage, "records");
+        List&lt;Setmeal&gt; records = pageInfo.getRecords();
+
+        List&lt;SetmealDto&gt; list = records.stream().map((item) -&gt; {
+            SetmealDto setmealDto = new SetmealDto();
+            //对象拷贝
+            BeanUtils.copyProperties(item, setmealDto);
+            //分类id
+            Long categoryId = item.getCategoryId();
+            //根据分类id查询分类对象
+            Category category = categoryService.getById(categoryId);
+            if (category != null) {
+                //分类名称
+                String categoryName = category.getName();
+                setmealDto.setCategoryName(categoryName);
+            }
+            return setmealDto;
+        }).collect(Collectors.toList());
+
+        dtoPage.setRecords(list);
+        return R.success(dtoPage);
+    }
+
+    /**
+     * 删除套餐
+     *
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    public R&lt;String&gt; delete(@RequestParam List&lt;Long&gt; ids) {
+        log.info("ids:{}", ids);
+
+        setmealService.removeWithDish(ids);
+
+        return R.success("套餐数据删除成功");
+    }
+
+//    @GetMapping("/list")
+//    public R&lt;List&lt;Setmeal&gt;&gt; list(Setmeal setmeal) {
+//        log.info("setmeal:{}", setmeal);
+//        //条件构造器
+//        LambdaQueryWrapper&lt;Setmeal&gt; queryWrapper = new LambdaQueryWrapper&lt;&gt;();
+//        queryWrapper.like(StringUtils.isNotEmpty(setmeal.getName()), Setmeal::getName, setmeal.getName());
+//        queryWrapper.eq(null != setmeal.getCategoryId(), Setmeal::getCategoryId, setmeal.getCategoryId());
+//        queryWrapper.eq(null != setmeal.getStatus(), Setmeal::getStatus, setmeal.getStatus());
+//        queryWrapper.orderByDesc(Setmeal::getUpdateTime);
+//
+//        return R.success(setmealService.list(queryWrapper));
+//    }
+
+    /**
+     * 根据条件查询套餐数据
+     *
+     * @param setmeal
+     * @return
+     */
+    @GetMapping("/list")
+    public R&lt;List&lt;Setmeal&gt;&gt; list1(@RequestBody Setmeal setmeal) {
+        LambdaQueryWrapper&lt;Setmeal&gt; queryWrapper = new LambdaQueryWrapper&lt;&gt;();
+        queryWrapper.eq(setmeal.getCategoryId() != null, Setmeal::getCategoryId, setmeal.getCategoryId());
+        queryWrapper.eq(setmeal.getStatus() != null, Setmeal::getStatus, setmeal.getStatus());
+        queryWrapper.orderByDesc(Setmeal::getUpdateTime);
+
+        List&lt;Setmeal&gt; list = setmealService.list(queryWrapper);
+
+        return R.success(list);
+
+    }
+
+    @PostMapping("/status/{status}")
+    public R&lt;List&lt;Setmeal&gt;&gt; status(@PathVariable Integer status, @RequestParam List&lt;Long&gt; ids) {
+        LambdaQueryWrapper&lt;Setmeal&gt; queryWrapper = new LambdaQueryWrapper&lt;&gt;();
+        queryWrapper.in(Setmeal::getId, ids);
+        List&lt;Setmeal&gt; list = setmealService.list(queryWrapper);
+        List&lt;Setmeal&gt; list1 = list.stream().map((item) -&gt; {
+            item.setStatus(status);
+            return item;
+        }).collect(Collectors.toList());
+        setmealService.updateBatchById(list1);
+        return R.success(list1);
+    }
+}
+</code></pre>
+<h2 id="6-启动类上加上注解"><a href="#6-启动类上加上注解" class="headerlink" title="6.启动类上加上注解"></a>6.启动类上加上注解</h2><p>主要是@ServletComponentScan这个注解</p>
+<pre><code class="java">import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+/**
+ * @author a1002
+ */
+@Slf4j
+@SpringBootApplication
+@ServletComponentScan
+@EnableTransactionManagement
+public class YangEatApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(YangEatApplication.class, args);
+        log.info("项目启动成功...");
+    }
+
+}
+</code></pre>
+<h1 id="三，时间更新全局配置（自定义元数据对象处理器）"><a href="#三，时间更新全局配置（自定义元数据对象处理器）" class="headerlink" title="三，时间更新全局配置（自定义元数据对象处理器）"></a>三，时间更新全局配置（自定义元数据对象处理器）</h1><h2 id="1-数据库相关字段配置"><a href="#1-数据库相关字段配置" class="headerlink" title="1.数据库相关字段配置"></a>1.数据库相关字段配置</h2><p><img src="https://img-blog.csdnimg.cn/b273136714724aeab068e2c6768738a3.png"></p>
+<h2 id="2-实体类配置"><a href="#2-实体类配置" class="headerlink" title="2. 实体类配置"></a>2. 实体类配置</h2><pre><code class="java">package com.blog.pojo;
+
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+/**
+ * @author a1002
+ */
+@SuppressWarnings("all")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
+    private String username;
+    private String password;
+    /**
+     * 0是用户
+     * 1是管理员
+     */
+    private Integer status;
+    private String img;
+    private String blogPath;
+    private String grade;
+
+    //创建时间
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+
+    //更新时间
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+
+    //创建人
+    @TableField(fill = FieldFill.INSERT)
+    private Long createUser;
+
+
+    //修改人
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Long updateUser;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(Long id, String username, String password, String img, String blogPath, String grade) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.img = img;
+        this.blogPath = blogPath;
+        this.grade = grade;
+    }
+
+    public User(Long id, String username, String password, String blogPath, String grade) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.blogPath = blogPath;
+        this.grade = grade;
+    }
+
+
+}
+</code></pre>
+<p>其中主要是这些字段</p>
+<pre><code class="java">    //创建时间
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+
+    //更新时间
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+
+    //创建人
+    @TableField(fill = FieldFill.INSERT)
+    private Long createUser;
+
+
+    //修改人
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Long updateUser;
+</code></pre>
+<p>相关配置：</p>
+<p><img src="https://img-blog.csdnimg.cn/a45646fa69df40ecbce35b32253bcea6.png"></p>
+<p>主要是这三个配置类：</p>
+<pre><code class="java">package com.blog.common;
+
+/**
+ * 基于ThreadLocal封装工具类，用户保存和获取当前登录用户id
+ *
+ * @author a1002
+ */
+public class BaseContext {
+    private static ThreadLocal&lt;Long&gt; threadLocal = new ThreadLocal&lt;&gt;();
+
+    /**
+     * 设置值
+     *
+     * @param id
+     */
+    public static void setCurrentId(Long id) {
+        threadLocal.set(id);
+    }
+
+    /**
+     * 获取值
+     *
+     * @return
+     */
+    public static Long getCurrentId() {
+        return threadLocal.get();
+    }
+}
+</code></pre>
+<pre><code class="java">package com.blog.common;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+
+import java.math.BigInteger;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
+
+/**
+ * 对象映射器:基于jackson将Java对象转为json，或者将json转为Java对象
+ * 将JSON解析为Java对象的过程称为 [从JSON反序列化Java对象]
+ * 从Java对象生成JSON的过程称为 [序列化Java对象到JSON]
+ *
+ * @author a1002
+ */
+public class JacksonObjectMapper extends ObjectMapper {
+
+    public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
+    public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final String DEFAULT_TIME_FORMAT = "HH:mm:ss";
+
+    public JacksonObjectMapper() {
+        super();
+        //收到未知属性时不报异常
+        this.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        //反序列化时，属性不存在的兼容处理
+        this.getDeserializationConfig().withoutFeatures(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+
+
+        SimpleModule simpleModule = new SimpleModule()
+                .addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT)))
+                .addDeserializer(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT)))
+                .addDeserializer(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DEFAULT_TIME_FORMAT)))
+
+                .addSerializer(BigInteger.class, ToStringSerializer.instance)
+                .addSerializer(Long.class, ToStringSerializer.instance)
+                .addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT)))
+                .addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT)))
+                .addSerializer(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(DEFAULT_TIME_FORMAT)));
+
+        //注册功能模块 例如，可以添加自定义序列化器和反序列化器
+        this.registerModule(simpleModule);
+    }
+}
+</code></pre>
+<pre><code class="java">package com.blog.common;
+
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
+
+/**
+ * 自定义元数据对象处理器
+ *
+ * @author a1002
+ */
+@Component
+@Slf4j
+public class MyMetaObjecthandler implements MetaObjectHandler {
+    /**
+     * 插入操作，自动填充
+     *
+     * @param metaObject
+     */
+    @Override
+    public void insertFill(MetaObject metaObject) {
+        log.info("公共字段自动填充[insert]...");
+        log.info(metaObject.toString());
+
+        metaObject.setValue("createTime", LocalDateTime.now());
+        metaObject.setValue("updateTime", LocalDateTime.now());
+        metaObject.setValue("createUser", BaseContext.getCurrentId());
+        metaObject.setValue("updateUser", BaseContext.getCurrentId());
+    }
+
+    /**
+     * 更新操作，自动填充
+     *
+     * @param metaObject
+     */
+    @Override
+    public void updateFill(MetaObject metaObject) {
+        log.info("公共字段自动填充[update]...");
+        log.info(metaObject.toString());
+
+        long id = Thread.currentThread().getId();
+        log.info("线程id为：{}", id);
+
+        metaObject.setValue("updateTime", LocalDateTime.now());
+        metaObject.setValue("updateUser", BaseContext.getCurrentId());
+    }
+}
+</code></pre>
+<p>GlobalExceptionHandler是针对添加用户时避免用户重复添加的异常处理</p>
+<pre><code class="java">package com.blog.common;
+
+import com.blog.utils.R;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.sql.SQLIntegrityConstraintViolationException;
+
+/**
+ * 全局异常处理
+ *
+ * @author a1002
+ */
+@ControllerAdvice(annotations = {RestController.class, Controller.class})
+@ResponseBody
+@Slf4j
+public class GlobalExceptionHandler {
+
+    /**
+     * 异常处理方法
+     *
+     * @return
+     */
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public R&lt;String&gt; exceptionHandler(SQLIntegrityConstraintViolationException ex) {
+        log.error(ex.getMessage());
+
+        if (ex.getMessage().contains("Duplicate entry")) {
+            String[] split = ex.getMessage().split(" ");
+            String msg = split[2] + "已存在";
+            return R.error(msg);
+        }
+
+        return R.error("未知错误");
+    }
+
+//    /**
+//     * 异常处理方法
+//     *
+//     * @return
+//     */
+//    @ExceptionHandler(CustomException.class)
+//    public R&lt;String&gt; exceptionHandler(CustomException ex) {
+//        log.error(ex.getMessage());
+//
+//        return R.error(ex.getMessage());
+//    }
+
+}
+</code></pre>
+<h1 id="四-WebSocket打造在线聊天室"><a href="#四-WebSocket打造在线聊天室" class="headerlink" title="四.WebSocket打造在线聊天室"></a>四.WebSocket打造在线聊天室</h1><p>目录</p>
+<p><img src="https://img-blog.csdnimg.cn/faa39ce75a334bcaadede677c8e90683.png"></p>
+<h2 id="1-导入依赖-2"><a href="#1-导入依赖-2" class="headerlink" title="1.导入依赖"></a>1.导入依赖</h2><pre><code class="java">        &lt;!--websocket--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-websocket&lt;/artifactId&gt;
+            &lt;version&gt;2.7.2&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<h2 id="2-配置类"><a href="#2-配置类" class="headerlink" title="2.配置类"></a>2.配置类</h2><pre><code class="java">package com.websockettest.config;
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+
+import javax.websocket.server.ServerEndpointConfig;
+
+/**
+ * @author a1002
+ */
+public class MySpringConfigurator extends ServerEndpointConfig.Configurator implements ApplicationContextAware {
+
+    private static volatile BeanFactory context;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        MySpringConfigurator.context = applicationContext;
+    }
+
+    @Override
+    public &lt;T&gt; T getEndpointInstance(Class&lt;T&gt; clazz) throws InstantiationException {
+        return context.getBean(clazz);
+    }
+}
+</code></pre>
+<pre><code class="java">package com.websockettest.config;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.socket.server.standard.ServerEndpointExporter;
+
+/**
+ * @author a1002
+ */
+@Configuration
+@ConditionalOnWebApplication
+public class WebSocketConfig {
+
+    //使用boot内置tomcat时需要注入此bean
+    @Bean
+    public ServerEndpointExporter serverEndpointExporter() {
+        return new ServerEndpointExporter();
+    }
+
+
+    @Bean
+    public MySpringConfigurator mySpringConfigurator() {
+        return new MySpringConfigurator();
+    }
+}
+</code></pre>
+<h2 id="3-工具类"><a href="#3-工具类" class="headerlink" title="3.工具类"></a>3.工具类</h2><pre><code class="java">package com.websockettest.utils;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * @author a1002
+ */
+public class DateUtils {
+    public static String getDate() {
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        return format.format(date);
+
+
+    }
+}
+</code></pre>
+<h2 id="4-controller"><a href="#4-controller" class="headerlink" title="4.controller"></a>4.controller</h2><pre><code class="java">package com.websockettest.controller;
+
+import com.websockettest.config.MySpringConfigurator;
+import com.websockettest.utils.DateUtils;
+import org.springframework.stereotype.Component;
+
+import javax.websocket.*;
+import javax.websocket.server.ServerEndpoint;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * @author a1002
+ * @ServerEndpoint 注解是一个类层次的注解，它的功能主要是将目前的类定义成一个websocket服务器端,注解的值将被用于监听用户连接的终端访问URL地址,客户端可以通过这个URL来连接到WebSocket服务器端
+ */
+@ServerEndpoint(value = "/chat/{uid}", configurator = MySpringConfigurator.class)
+@Component
+public class WebSocketTest {
+    private Session session;
+
+
+    private String getUid(Session session) {
+        this.session = session;
+        Map parem = session.getPathParameters();
+        String uid = parem.get("uid").toString();
+        return uid;
+    }
+
+    /**
+     * 当前登录人的 session 管理器
+     */
+    private static Map&lt;String, Session&gt; sessionMessage = new HashMap&lt;&gt;();
+
+    @OnOpen//打开连接执行
+    public void onOpw(Session session) {
+        String uid = getUid(session);
+        sessionMessage.put(uid, session);
+        System.out.println("[" + uid + "] 进入聊天室");
+        sendMessage("[" + uid + "]   进入聊天室");
+    }
+
+    @OnMessage//收到消息执行
+    public void onMessage(String message, Session session) {
+        String uid = getUid(session);
+        sendMessage(uid + "  (" + DateUtils.getDate() + ")  说: " + message);
+    }
+
+    @OnClose//关闭连接执行
+    public void onClose(Session session) {
+        System.out.println(session.getId() + "关闭连接");
+    }
+
+    @OnError//连接错误的时候执行
+    public void onError(Throwable error, Session session) {
+        System.out.println("错误的时候执行");
+        error.printStackTrace();
+    }
+
+
+    /**
+     * 发送消息
+     *
+     * @param message
+     */
+    public void sendMessage(String message) {
+        for (String uid : sessionMessage.keySet()) {
+            try {
+                sessionMessage.get(uid).getAsyncRemote().sendText(message);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+
+}
+</code></pre>
+<h2 id="5-index-html"><a href="#5-index-html" class="headerlink" title="5.index.html"></a>5.index.html</h2><pre><code class="java">&lt;!DOCTYPE html&gt;
+&lt;html lang="zh"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;欢迎来到聊天室&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+Welcome&lt;br/&gt; &lt;span id="yhm"&gt;&lt;/span&gt;
+
+&lt;div id="div1"&gt;
+
+    &lt;input id="account" type="text" placeholder="用户名"/&gt;
+
+    &lt;button onclick="init()"&gt;连接聊天室&lt;/button&gt;
+
+    &lt;hr/&gt;
+&lt;/div&gt;
+
+&lt;div id="div2" hidden&gt;
+    &lt;input id="text" type="text"/&gt;
+    &lt;button onclick="send()"&gt;发送消息&lt;/button&gt;
+    &lt;hr/&gt;
+
+&lt;/div&gt;
+
+
+&lt;div id="message"&gt;&lt;/div&gt;
+
+
+&lt;/body&gt;
+&lt;script type="text/javascript"&gt;
+    var websocaket = null;
+
+
+    function init() {
+        var account = document.getElementById("account").value;
+        if (account == '') {
+            setdivInnerHTML("没有输入UID");
+            return false;
+        }
+
+
+        if ('WebSocket' in window) {
+            websocaket = new WebSocket("ws://110.40.210.213:8848/chat/" + account);//用于创建 WebSocket 对象。WebSocketTest对应的是java类的注解值
+        } else {
+            setdivInnerHTML("当前浏览器不支持");
+        }
+        //连接发生错误的时候回调方法；
+        websocaket.onerror = function () {
+            setdivInnerHTML("连接错误");
+        }
+        //连接成功时建立回调方法；
+        websocaket.onopen = function () {
+
+            document.getElementById("div2").hidden = false;
+
+            document.getElementById("div1").hidden = true;
+            document.getElementById("yhm").text(account);
+
+            setdivInnerHTML("连接成功");
+        }
+        //收到消息的回调方法
+        websocaket.onmessage = function (msg) {
+            setdivInnerHTML(msg.data);
+        }
+        //连接关闭的回调方法
+        websocaket.onclose = function () {
+            setdivInnerHTML("关闭成功");
+        }
+    }
+
+    //关闭websocket
+    //
+    function closea() {
+        websocaket.close();
+        alert("点击关闭");
+    }
+
+    function setdivInnerHTML(innerHTML) {
+        document.getElementById('message').innerHTML += innerHTML + '&lt;br/&gt;';
+    }
+
+    function send() {
+        var message = document.getElementById('text').value;
+        websocaket.send(message);//给后台发送数据
+    }
+&lt;/script&gt;
+&lt;/html&gt;
+</code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">安稳</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://anwenyy.githun.io/2022/12/09/Mybatis-plus%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE%E6%BC%94%E7%A4%BA+%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E6%95%B0%E6%8D%AE%E5%AF%B9%E8%B1%A1%E5%A4%84%E7%90%86%E5%99%A8+ws/">http://anwenyy.githun.io/2022/12/09/Mybatis-plus%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE%E6%BC%94%E7%A4%BA+%E8%87%AA%E5%AE%9A%E4%B9%89%E5%85%83%E6%95%B0%E6%8D%AE%E5%AF%B9%E8%B1%A1%E5%A4%84%E7%90%86%E5%99%A8+ws/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">安稳</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/mybatis-java-%E6%95%B0%E6%8D%AE%E5%BA%93-WebSocket-%E5%85%83%E6%95%B0%E6%8D%AE/">
+                                    <span class="chip bg-color">mybatis java 数据库 WebSocket 元数据</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+new Valine({
+        el: '#vcomments',
+        appId: 'mK8JgawPjbE6GtrDujBYxrbs-gzGzoHsz',
+        appKey: 'kwlts3rIw2gmqr3sQizGXv3Y',
+        notify: '' === 'true',
+        verify: '' === 'true',
+        visitor: '' === 'true',
+        avatar: 'monsterid',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: '昵称填写qq可以显示qq头像和昵称哦~',
+        enableQQ: true,
+        emojiCDN: '//i0.hdslb.com/bfs/emote/', 
+        // 表情title和图片映射
+        emojiMaps: {
+        "tv_doge": "6ea59c827c414b4a2955fe79e0f6fd3dcd515e24.png",
+        "tv_亲亲": "a8111ad55953ef5e3be3327ef94eb4a39d535d06.png",
+        "tv_偷笑": "bb690d4107620f1c15cff29509db529a73aee261.png",
+        "tv_再见": "180129b8ea851044ce71caf55cc8ce44bd4a4fc8.png",
+        "tv_冷漠": "b9cbc755c2b3ee43be07ca13de84e5b699a3f101.png",
+        "tv_发怒": "34ba3cd204d5b05fec70ce08fa9fa0dd612409ff.png",
+        "tv_发财": "34db290afd2963723c6eb3c4560667db7253a21a.png",
+        "tv_可爱": "9e55fd9b500ac4b96613539f1ce2f9499e314ed9.png",
+        "tv_吐血": "09dd16a7aa59b77baa1155d47484409624470c77.png",
+        "tv_呆": "fe1179ebaa191569b0d31cecafe7a2cd1c951c9d.png",
+        "tv_呕吐": "9f996894a39e282ccf5e66856af49483f81870f3.png",
+        "tv_困": "241ee304e44c0af029adceb294399391e4737ef2.png",
+        "tv_坏笑": "1f0b87f731a671079842116e0991c91c2c88645a.png",
+        "tv_大佬": "093c1e2c490161aca397afc45573c877cdead616.png",
+        "tv_大哭": "23269aeb35f99daee28dda129676f6e9ea87934f.png",
+        "tv_委屈": "d04dba7b5465779e9755d2ab6f0a897b9b33bb77.png",
+        "tv_害羞": "a37683fb5642fa3ddfc7f4e5525fd13e42a2bdb1.png",
+        "tv_尴尬": "7cfa62dafc59798a3d3fb262d421eeeff166cfa4.png",
+        "tv_微笑": "70dc5c7b56f93eb61bddba11e28fb1d18fddcd4c.png",
+        "tv_思考": "90cf159733e558137ed20aa04d09964436f618a1.png",
+        "tv_惊吓": "0d15c7e2ee58e935adc6a7193ee042388adc22af.png",
+        "tv_打脸": "56ab10b624063e966bfcb76ea5dc4794d87dfd47.png",
+        "tv_抓狂": "fe31c08edad661d63762b04e17b8d5ae3c71a757.png",
+        "tv_抠鼻": "c666f55e88d471e51bbd9fab9bb308110824a6eb.png",
+        "tv_斜眼笑": "911f987aa8bc1bee12d52aafe62bc41ef4474e6c.png",
+        "tv_无奈": "ea8ed89ee9878f2fece2dda0ea8a5dbfe21b5751.png",
+        "tv_晕": "5443c22b4d07fb1907ccc610c8e6db254f2461b7.png",
+        "tv_流汗": "cead1c351ab8d79e9f369605beb90148db0fbed3.png",
+        "tv_流泪": "7e71cde7858f0cd50d74b0264aa26db612a8a167.png",
+        "tv_流鼻血": "c32d39db2737f89b904ca32700d140a9241b0767.png",
+        "tv_点赞": "f85c354995bd99e28fc76c869bfe42ba6438eff4.png",
+        "tv_生气": "26702dcafdab5e8225b43ffd23c94ac1ff932654.png",
+        "tv_生病": "8b0ec90e6b86771092a498c54f09fc94621c1900.png",
+        "tv_疑问": "0793d949b18d7be716078349c202c15ff166f314.png",
+        "tv_白眼": "c1d59f439e379ee50eef488bcb5e5378e5044ea4.png",
+        "tv_皱眉": "72ccad6679fea0d14cce648b4d818e09b8ffea2d.png",
+        "tv_目瞪口呆": "0b8cb81a68de5d5365212c99375e7ace3e7891b7.png",
+        "tv_睡着": "8b196675b53af58264f383c50ad0945048290b33.png",
+        "tv_笑哭": "1abc628f6d4f4caf9d0e7800878f4697abbc8273.png",
+        "tv_腼腆": "89712c0d4af73e67f89e35cbc518420380a7f6f4.png",
+        "tv_色": "61822c7e9aae5da76475e7892534545336b23a6f.png",
+        "tv_调侃": "4bc022533ef31544ca0d72c12c808cf4a1cce3e3.png",
+        "tv_调皮": "b9c41de8e82dd7a8515ae5e3cb63e898bf245186.png",
+        "tv_鄙视": "6e72339f346a692a495b123174b49e4e8e781303.png",
+        "tv_闭嘴": "c9e990da7f6e93975e25fd8b70e2e290aa4086ef.png",
+        "tv_难过": "87f46748d3f142ebc6586ff58860d0e2fc8263ba.png",
+        "tv_馋": "fc7e829b845c43c623c8b490ee3602b7f0e76a31.png",
+        "tv_鬼脸": "0ffbbddf8a94d124ca2f54b360bbc04feb6bbfea.png",
+        "tv_黑人问号": "45821a01f51bc867da9edbaa2e070410819a95b2.png",
+        "tv_鼓掌": "1d21793f96ef4e6f48b23e53e3b9e42da833a0f6.png"
+        },
+        requiredFields: ['nick','mail'], //设置必填项
+    });
+</script>
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/12/27/mysql%E4%B8%80%E4%BA%9B%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="mysql一些小知识点">
+                        
+                        <span class="card-title">mysql一些小知识点</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-12-27
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/java%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" class="post-category">
+                                    java开发框架
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/mysql-%E6%95%B0%E6%8D%AE%E5%BA%93-java/">
+                        <span class="chip bg-color">mysql 数据库 java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/11/23/%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9Fminio/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="分布式文件存储系统minio">
+                        
+                        <span class="card-title">分布式文件存储系统minio</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6-amp-%E6%9C%8D%E5%8A%A1%E6%A1%86%E6%9E%B6/" class="post-category">
+                                    中间件&amp;服务框架
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93-minio-java/">
+                        <span class="chip bg-color">数据库 minio java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="tencent"
+                   type="playlist"
+                   id="8605834517"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <span id="year">2019</span>
+            <a href="/about" target="_blank">安稳</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">76.8k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/anwenyy" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2078907117.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2078907117" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 2078907117" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+<script type="text/javascript">
+    //只在桌面版网页启用特效
+    var windowWidth = $(window).width();
+    if (windowWidth > 768) {
+           document.write('<script type="text/javascript" src="/js/sakura.js"><\/script>');
+    }
+    </script>
+</body>
+
+</html>
